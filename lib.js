@@ -185,19 +185,63 @@ M.Derivative = function(inM)
 	}
 	return outM;
 };
-
-
-// assuming inM and inCloud are the same length, and that their members have the same dimension,
-// return a new matrix whose members are the respective rows of inCloud and inM multiplied.
-M.Multiply = function(inM, inCloud)
+// batch multiply these pairs of vectors
+M.Multiply = function(inCloud1, inCloud2)
 {
 	var i;
 	var outM = [];
-	for(i=0; i<inM.length; i++)
+	for(i=0; i<inCloud1.length; i++)
 	{
-		outM.push(V.Multiply(inM[i], inCloud[i]));
+		outM.push(V.Multiply(inCloud1[i], inCloud2[i]));
 	};
 	return outM;
+};
+// batch add
+M.Add = function(inCloud1, inCloud2)
+{
+    var outM = [];
+    
+    var i;
+    for(i=0; i<inCloud1.length; i++)
+    {
+        outM.push(V.Add(inCloud1[i], inCloud2[i]));
+    }
+    return outM;
+};
+M.Subtract = function(inCloud1, inCloud2)
+{
+    var outM = [];
+    
+    var i;
+    for(i=0; i<inCloud1.length; i++)
+    {
+        outM.push(V.Subtract(inCloud1[i], inCloud2[i]));
+    }
+    return outM;
+};
+M.Scale = function(inCloud1, inScalar)
+{
+    var outM = [];
+    
+    var i;
+    for(i=0; i<inCloud1.length; i++)
+    {
+        outM.push(V.Scale(inCloud1[i], inScalar));
+    }
+    return outM;
+};
+M.Clone = function(inM)
+{
+    var i;
+    var outM;
+    var outV;
+    
+    outM =[];
+    for(i=0; i<inM.length; i++)
+    {
+        outM.push(V.Clone(inM[i]));
+    }
+    return outM;
 };
 
 
@@ -380,15 +424,48 @@ M.Pad = function(inM)
 	var outM = [];
 	
 	var i;
-	for(i=0; i<inM.length; i++)
+	var copy;
+    for(i=0; i<inM.length; i++)
 	{
-		outM.push(V.Clone(inM[i]).push(1));
+        copy = V.Clone(inM[i]);
+        copy[copy.length] = 1;
+		outM.push(copy);
+	}
+	
+	return outM;
+};
+M.Pad = function(inM)
+{
+	var outM = [];
+	
+	var i;
+	var copy;
+    for(i=0; i<inM.length; i++)
+	{
+        copy = V.Clone(inM[i]);
+        copy[copy.length] = 1;
+		outM.push(copy);
 	}
 	
 	return outM;
 };
 
 
+M.Unpad = function(inM)
+{
+	var outM = [];
+	
+	var i;
+	var copy;
+    for(i=0; i<inM.length; i++)
+	{
+        copy = V.Clone(inM[i]);
+        copy.splice(copy.length-1, 1);
+		outM.push(copy);
+	}
+	
+	return outM;
+};
 
 
 
