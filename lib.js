@@ -190,7 +190,7 @@ M.Multiply = function(inCloud1, inCloud2)
 {
 	var i;
 	var outM = [];
-	for(i=0; i<inM.length; i++)
+	for(i=0; i<inCloud1.length; i++)
 	{
 		outM.push(V.Multiply(inCloud1[i], inCloud2[i]));
 	};
