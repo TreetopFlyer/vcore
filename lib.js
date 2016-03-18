@@ -129,6 +129,7 @@ M.Transpose = function(inM)
 }
 
 // returns a matrix that is the result of the outer product of inV1 and inV2
+// where the Nth member of outM is a copy of V1, scaled by the Nth component of V2
 M.Outer = function(inV1, inV2)
 {
 	var outM = [];
@@ -136,7 +137,7 @@ M.Outer = function(inV1, inV2)
 	var i;
 	for(i=0; i<inV1.length; i++)
 	{
-		outM.push(V.Scale(inV2, inV1[i]));
+		outM.push(V.Scale(inV1, inV2[i]));
 	}
 	
 	return outM;
@@ -419,21 +420,7 @@ M.Combine = function(inList)
 };
 
 // add a new column full of 1's
-M.Pad = function(inM)
-{
-	var outM = [];
-	
-	var i;
-	var copy;
-    for(i=0; i<inM.length; i++)
-	{
-        copy = V.Clone(inM[i]);
-        copy[copy.length] = 1;
-		outM.push(copy);
-	}
-	
-	return outM;
-};
+
 M.Pad = function(inM)
 {
 	var outM = [];
