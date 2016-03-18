@@ -135,7 +135,7 @@ M.Outer = function(inV1, inV2)
 	var outM = [];
 	
 	var i;
-	for(i=0; i<inV1.length; i++)
+	for(i=0; i<inV2.length; i++)
 	{
 		outM.push(V.Scale(inV1, inV2[i]));
 	}
