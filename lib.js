@@ -419,47 +419,38 @@ M.Combine = function(inList)
 	return outM;
 };
 
-// add a new column full of 1's
-
+/*
+PLEASE NOTE: These padding routines are unique to this library in that they
+actually modify the input object(s) rather than returning modified copies!
+*/
+// add a new component (set to '1') to each member of inM
 M.Pad = function(inM)
 {
-	var outM = [];
-	
 	var i;
-	var copy;
-    for(i=0; i<inM.length; i++)
+	for(i=0; i<inM.length; i++)
 	{
-        copy = V.Clone(inM[i]);
-        copy[copy.length] = 1;
-		outM.push(copy);
+		inM[i].push(1);
 	}
-	
-	return outM;
+    	return inM;
 };
-
-
+// remove the last component of each memeber of inM
 M.Unpad = function(inM)
 {
-	var outM = [];
-	
 	var i;
-	var copy;
-    for(i=0; i<inM.length; i++)
+    	for(i=0; i<inM.length; i++)
 	{
-        copy = V.Clone(inM[i]);
-        copy.splice(copy.length-1, 1);
-		outM.push(copy);
+        	inM[i].pop();
 	}
-	
-	return outM;
+	return inM;
 };
-
-
-
-
-
-
-
-
-
-
+// set the last component of each member of inM to 1
+M.Repad = function(inM)
+{
+	var i;
+	var last = inM[0].length-1;
+    	for(i=0; i<inM.length; i++)
+	{
+        	inM[i][last] = 1;
+	}
+	return inM;
+};
