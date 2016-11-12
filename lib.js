@@ -288,12 +288,21 @@ M.GlobalToLocal = function(inM, inB)
 	var outV = [];
 	var size;
 	var min;
+	var denominator;
 	for(i=0; i<inM.length; i++)
 	{
 		outV = [];
 		for(j=0; j<dimensions; j++)
 		{
-			outV[j] = (inM[i][j] - inB[0][j])/(inB[1][j] - inB[0][j]);
+			denominator = inB[1][j] - inB[0][j];
+			if(denominator == 0)
+			{
+				outV[j] = inB[1][j];// if min and max are the same, just output max
+			}
+			else
+			{
+				outV[j] = (inM[i][j] - inB[0][j])/denominator]);	
+			}
 		}
 		outM.push(outV);
 	}
