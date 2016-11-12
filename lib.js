@@ -301,7 +301,7 @@ M.GlobalToLocal = function(inM, inB)
 			}
 			else
 			{
-				outV[j] = (inM[i][j] - inB[0][j])/denominator]);	
+				outV[j] = (inM[i][j] - inB[0][j])/denominator;	
 			}
 		}
 		outM.push(outV);
